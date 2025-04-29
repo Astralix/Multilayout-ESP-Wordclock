@@ -35,9 +35,11 @@ iUhrType *usedUhrType = nullptr;
 #ifdef ESP8266
 NeoPixelBus<NeoMultiFeature, Neo800KbpsMethod> *strip_RGB = NULL;
 NeoPixelBus<NeoGrbwFeature, Neo800KbpsMethod> *strip_RGBW = NULL;
+#define DEBUG_SPEED 250000
 #elif defined(ESP32)
 NeoPixelBus<NeoGrbwFeature, NeoSk6812Method> *strip_RGBW = NULL;
 NeoPixelBus<NeoMultiFeature, NeoWs2812xMethod> *strip_RGB = NULL;
+#define DEBUG_SPEED 460800
 #endif
 
 WiFiClient client;
@@ -146,7 +148,7 @@ void setup() {
     // Start serial interface if required
     //-------------------------------------
 #if GENERAL_VERBOSE
-    Serial.begin(460800);
+    Serial.begin(DEBUG_SPEED);
     Serial.println("");
     Serial.println("--------------------------------------");
     Serial.println("Begin Setup");
@@ -162,6 +164,7 @@ void setup() {
     //-------------------------------------
 
     // Read the power cycle count from EEPROM
+    // After 5 consecutive cycles, reset EEPROM
     powerCycleCount = EEPROM.read(powerCycleCountAddr);
     incrementPowerCycleCount();
     Serial.print("Power cycle count: ");
