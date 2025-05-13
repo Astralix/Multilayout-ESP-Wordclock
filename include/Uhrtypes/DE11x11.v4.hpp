@@ -41,7 +41,7 @@ public:
             break;
 
         case FrontWord::viertel:
-            setFrontMatrixWord(2, 2, 6);
+            setFrontMatrixWord(2, 0, 6);
             break;
 
         case FrontWord::dreiviertel:
@@ -89,7 +89,7 @@ public:
             break;
 
         case FrontWord::hour_3:
-            setFrontMatrixWord(6, 6, 9);
+            setFrontMatrixWord(8, 6, 9);
             break;
 
         case FrontWord::hour_4:
